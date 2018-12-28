@@ -1,0 +1,23 @@
+Player:
+Movement
+Jump
+Shoot
+
+Level:
+Base (Line)
+SpawnPoint
+Endpoint
+
+Enemies:
+Bullet bill
+koopa's
+
+Physics:
+Ice
+Trampoline
+
+
+Day 1:
+Movement
+CheckPoints
+
