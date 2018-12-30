@@ -7,11 +7,19 @@ public class PlayerController : MonoBehaviour {
 	private PlayerManager playerManager;
 
 	public CharacterController2D controller;
+	private Rigidbody2D rb2d;
+
+	public int hp = 1;
 
 	public float movementSpeed = 40f;
 	float horizontalMove = 0;
 	bool isJumping = false;
 	bool isCrouching = false;
+
+
+	//Wind physics
+	private bool inWindzone = false;
+	private Wind_Physics windZone;
 
 	private void Awake()
 	{
@@ -21,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void Start()
 	{
+		rb2d = GetComponent<Rigidbody2D>();
 		transform.position = playerManager.lastCheckPointPos;
 	}
 
@@ -46,5 +55,31 @@ public class PlayerController : MonoBehaviour {
 	{
 		controller.Move(horizontalMove * Time.fixedDeltaTime, isCrouching, isJumping);
 		isJumping = false;
+
+		// WindZone
+		if (inWindzone)
+		{
+			rb2d.AddForce(windZone.direction * windZone.strength);
+		}
+
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("WindZone"))
+		{
+			windZone = other.gameObject.GetComponent<Wind_Physics>();
+			inWindzone = true;
+			Debug.Log("In Windzone");
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("WindZone"))
+		{
+			windZone = null;
+			inWindzone = false;
+		}
 	}
 }
