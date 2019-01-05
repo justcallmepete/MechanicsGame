@@ -7,7 +7,7 @@ public class CheckPoint : MonoBehaviour {
 
 	private PlayerManager playerManager;
 
-	private void Awake()
+	private void Start()
 	{
 		playerManager = PlayerManager.Instance;
 	}

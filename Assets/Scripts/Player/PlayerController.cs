@@ -1,36 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
 	private PlayerManager playerManager;
-
-	public CharacterController2D controller;
 	private Rigidbody2D rb2d;
+	private Vector3 m_Velocity = Vector3.zero;
 
-	public int hp = 1;
+	public int hp = 3;
+	public Image hpImage;
+	public List<Sprite> healthbar = new List<Sprite>();
 
-	public float movementSpeed = 40f;
+
+
+	public float movementSpeed = 5f;
+	public float crouchSpeed = 1f;
 	float horizontalMove = 0;
 	bool isJumping = false;
 	bool isCrouching = false;
+	public bool isBounced = false;
+
+	//jumping
+	float fallMultiplier = 2.5f;
+	float lowJumpMultiplier = .5f;
+	public Image fill;
+	private float jumpCost = .5f;
+	public float stamina = 1;
+	public float maxStamina = 1;
+	public bool jumpedOnce = false;
 
 
-	//Wind physics
-	private bool inWindzone = false;
-	private Wind_Physics windZone;
+	[SerializeField]
+	private LayerMask groundLayer;
+	public float groundCheckRadius;
+	public bool isGrounded = true;
+	public Transform groundCheckPoint;
+
 
 	private void Awake()
 	{
 		playerManager = PlayerManager.Instance;
-		
 	}
 
 	private void Start()
 	{
-		rb2d = GetComponent<Rigidbody2D>();
 		transform.position = playerManager.lastCheckPointPos;
+		rb2d = GetComponent<Rigidbody2D>();
+		
 	}
 
 	private void Update()
@@ -49,37 +67,104 @@ public class PlayerController : MonoBehaviour {
 		{
 			isCrouching = false;
 		}
+
+		GainStamina();
 	}
 
 	private void FixedUpdate()
 	{
-		controller.Move(horizontalMove * Time.fixedDeltaTime, isCrouching, isJumping);
+		Move(horizontalMove * Time.fixedDeltaTime, isCrouching);
+		Jump(isJumping);
+		isGrounded = IsGrounded();
+		if (isGrounded)
+		{
+			if (isBounced)
+			{
+				isBounced = false;
+			}
+		}
 		isJumping = false;
+	}
 
-		// WindZone
-		if (inWindzone)
+	private void Move(float move, bool crouch)
+	{
+		if (isBounced) return;
+		//movement
+		Vector3 targetVelocity = new Vector2(move * movementSpeed, rb2d.velocity.y);
+		rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity, targetVelocity, ref m_Velocity, 0);
+
+		if (crouch)
 		{
-			rb2d.AddForce(windZone.direction * windZone.strength);
+		targetVelocity = new Vector2(move * movementSpeed, rb2d.velocity.y);
+		rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity, targetVelocity, ref m_Velocity, 0);
 		}
 
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
+	private void Jump(bool isJumping)
 	{
-		if (other.gameObject.CompareTag("WindZone"))
+
+		if (isJumping && isGrounded || isJumping && jumpedOnce)
 		{
-			windZone = other.gameObject.GetComponent<Wind_Physics>();
-			inWindzone = true;
-			Debug.Log("In Windzone");
+			isGrounded = false;
+			//rb2d.velocity = Vector2.up * 3f;
+			if (jumpCost <= stamina)
+			{
+				rb2d.AddForce(Vector2.up * 3f, ForceMode2D.Impulse);
+				stamina -= jumpCost;
+				if(!jumpedOnce)
+				jumpedOnce = true;
+			}
 		}
+		//jumping
+		if (rb2d.velocity.y < 0)
+		{
+			rb2d.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+		}
+
+		
 	}
 
-	private void OnTriggerExit2D(Collider2D other)
+	private void GainStamina()
 	{
-		if (other.gameObject.CompareTag("WindZone"))
+		fill.fillAmount = stamina;
+
+		if (!isGrounded) return;
+		if (stamina > maxStamina)
 		{
-			windZone = null;
-			inWindzone = false;
+			stamina = maxStamina;
 		}
+
+		if (stamina < maxStamina)
+			stamina += .1f * Time.deltaTime * 5;
+
+	}
+
+	private bool IsGrounded()
+	{
+
+		return Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
+	}
+
+	public void TakeDamage(int amount)
+	{
+		hp -= amount;
+		Debug.Log("Damage taken: " + amount);
+	}
+
+	public void FellDown()
+	{
+		hp -= 1;
+		if (hp <= 0)
+		{
+			Debug.Log("dead");
+			playerManager.ResetScene();
+
+		} else
+		{
+			hpImage.sprite = healthbar[hp];
+			transform.position = playerManager.lastCheckPointPos;
+		}
+		
 	}
 }

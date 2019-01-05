@@ -12,12 +12,30 @@ Enemies:
 Bullet bill
 koopa's
 
-Physics:
-Ice
-Trampoline
-
-
 Day 1:
 Movement
 CheckPoints
 
+
+Day 2:
+Item base class
+
+
+Day 3: breakdown (scratch a lot)
+
+Physics:
+Ice
+Trampoline
+Wind (half-done)
+
+
+Movement
+Jumping (double-Jump)
+one-way collision platforms
+falling & reset
+patrolling enemy ai
+(Ladder)
+Shooting
+
+
+Boss-battle
