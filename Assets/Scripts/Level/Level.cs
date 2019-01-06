@@ -12,5 +12,9 @@ public class Level : MonoBehaviour {
 		playerManager = PlayerManager.Instance;
 	}
 
-	//public void Reset
+	public void ResetLevel() {
+		// lose all powerups
+		// reset lives (ui)
+		// reset last checkpoint
+	}
 }
