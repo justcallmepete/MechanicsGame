@@ -148,8 +148,28 @@ public class PlayerController : MonoBehaviour {
 
 	public void TakeDamage(int amount)
 	{
-		hp -= amount;
+		if ((hp - amount) <= 0)
+		{
+			playerManager.ResetScene();
+		}
+		else
+		{
+			hp -= amount;
+			hpImage.sprite = healthbar[hp];
+		}
 		Debug.Log("Damage taken: " + amount);
+	}
+
+	public IEnumerator Knockback(float duration, float power, Vector3 direction)
+	{
+		float timer = 0;
+		while (timer < duration)
+		{
+			timer += Time.deltaTime;
+			rb2d.AddForce(new Vector3(direction.x - 100, direction.y + power, transform.position.z));
+		}
+
+		yield return 0;
 	}
 
 	public void FellDown()

@@ -4,37 +4,12 @@ using UnityEngine;
 
 public class Wind_Ball : MonoBehaviour {
 
-	private bool inWindzone = false;
-	private Wind_Physics zone;
-
-	private Rigidbody2D rb;
-
-	private void Start()
-	{
-		rb = GetComponent<Rigidbody2D>();
-	}
-
-	private void FixedUpdate()
-	{
-		if (inWindzone)
-		{
-			Debug.Log("In windzone");
-			rb.AddForce(zone.direction * zone.strength);	
-		}
-	}
-
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.CompareTag("WindZone"))
+		if (other.CompareTag("Player"))
 		{
-			zone = other.GetComponent<Wind_Physics>();
-			inWindzone = true;
+			// give player windball
+			other.GetComponent<PlayerController>();
 		}
-	}
-
-	private void OnTriggerExit2D(Collider2D other)
-	{
-		zone = null;
-		inWindzone = false;
 	}
 }

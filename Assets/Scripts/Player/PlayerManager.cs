@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour {
 		get
 		{
 			if (!instance)
-			{
+		{
 				//instance = new PlayerManager();
 				DontDestroyOnLoad(instance);
 			}

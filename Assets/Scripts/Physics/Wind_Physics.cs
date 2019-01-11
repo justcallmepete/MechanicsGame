@@ -7,6 +7,9 @@ public class Wind_Physics : MonoBehaviour {
 	public float strength;
 	public Vector2 direction;
 
+	private bool inWindzone = false;
+	private Rigidbody2D rb;
+
 	private void Start()
 	{
 		direction = this.transform.up;
@@ -48,4 +51,27 @@ public class Wind_Physics : MonoBehaviour {
 		Vector3 destination = transform.position + direction * scale;
 		Gizmos.DrawLine(transform.position, destination);
 	}
+
+	private void FixedUpdate()
+	{
+		if (inWindzone)
+		{
+			Debug.Log("In windzone");
+			rb.AddForce(direction * strength);
+		}
+
+	}
+		void OnTriggerEnter2D(Collider2D other)
+		{
+			if (other.CompareTag("Player"))
+			{
+				inWindzone = true;
+				rb = other.GetComponent<Rigidbody2D>();
+			}
+		}
+
+		void OnTriggerExit2D(Collider2D other)
+		{
+			inWindzone = false;
+		}
 }
