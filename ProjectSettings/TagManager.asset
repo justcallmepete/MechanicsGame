@@ -7,6 +7,7 @@ TagManager:
   - Cleaner
   - WindZone
   - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX

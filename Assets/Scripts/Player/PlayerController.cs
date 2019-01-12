@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (stamina < maxStamina)
-			stamina += .3f * Time.deltaTime * 5;
+			stamina += .5f * Time.deltaTime * 5;
 
 	}
 

@@ -37,7 +37,7 @@ public class FragileEnemy : MonoBehaviour
 	{
 		transform.Translate(Vector3.right * speed * Time.deltaTime);
 
-		RaycastHit2D rayDown = Physics2D.Raycast(groundCheck.position, Vector2.down, 5f, groundLayer);
+		RaycastHit2D rayDown = Physics2D.Raycast(groundCheck.position, Vector2.down, .3f, groundLayer);
 		Debug.DrawRay(groundCheck.position, Vector2.down);
 		if (!rayDown.collider)
 		{

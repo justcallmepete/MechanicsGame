@@ -6,7 +6,7 @@ public class Useable_Wind_Physics : MonoBehaviour
 {
 
 	[SerializeField]
-	private GameObject windBall;
+	//private GameObject windBall;
 	private Vector3 spawnPos;
 
 	float timer = 0;
@@ -38,7 +38,7 @@ public class Useable_Wind_Physics : MonoBehaviour
 
 	void RevertToBall()
 	{
-		Instantiate(windBall, spawnPos,windBall.transform.rotation, null);
+		//Instantiate(windBall, spawnPos,windBall.transform.rotation, null);
 		Destroy(this.gameObject);
 	}
 

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114978808569703206}
   m_Layer: 0
   m_Name: EnemyFragile
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,10 +167,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+  deathItemSpawn: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
   groundCheck: {fileID: 4150910438211686}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!212 &212182473643732420
 SpriteRenderer:
   m_ObjectHideFlags: 1

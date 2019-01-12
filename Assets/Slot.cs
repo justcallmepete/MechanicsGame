@@ -7,6 +7,7 @@ public class Slot : MonoBehaviour {
 
 	Inventory inventory;
 	public int id = 0;
+	public KeyCode key;
 
 	private void Start()
 	{
@@ -18,6 +19,15 @@ public class Slot : MonoBehaviour {
 		if (transform.childCount <= 0)
 		{
 			inventory.isTaken[id] = false;
+		}
+
+		if (transform.childCount > 0)
+		{
+			if (Input.GetKeyDown(key))
+			{
+				Debug.Log("item used");
+				transform.GetChild(0).GetComponent<Button>().onClick.Invoke();
+			}
 		}
 	}
 
