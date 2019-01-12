@@ -9,8 +9,11 @@ public class PlayerManager : MonoBehaviour {
 
 	private void Awake()
 	{
-		instance = this;
-		DontDestroyOnLoad(instance);
+		if (instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(instance);
+		}
 	}
 
 	public static PlayerManager Instance
@@ -31,17 +34,30 @@ public class PlayerManager : MonoBehaviour {
 	// playerspawner
 
 	// keep track of checkPoints
-	public Vector2 lastCheckPointPos;
+	public Transform lastCheckPointPos;
+
+	public void SetPlayerToCheckpoint()
+	{
+		GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos.position;
+	}
+
 
 	public void ResetScene()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Died();
+
 	}
 
 	public void BackToMenu()
 	{
 		//ToDo: Implement Menu scene
 		//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void LoadNextLevel(int scene)
+	{
+		SceneManager.LoadScene(scene);
 	}
 
 	public void QuitGame()

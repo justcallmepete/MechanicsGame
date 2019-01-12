@@ -5,6 +5,14 @@ using UnityEngine;
 public class LevelEnd : MonoBehaviour {
 
 	bool inCollisionZone = false;
+	public int sceneToLoad;
+
+	GameObject player;
+
+	private void Start()
+	{
+		player = GameObject.FindGameObjectWithTag("Player");
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -24,9 +32,12 @@ public class LevelEnd : MonoBehaviour {
 
 	private void Update()
 	{
+		//if (!inCollisionZone) return;
+
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			Debug.Log("Key needed");
+			PlayerManager.Instance.LoadNextLevel(sceneToLoad);
+			DontDestroyOnLoad(player);
 		}
 	}
 }

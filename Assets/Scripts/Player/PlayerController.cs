@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 m_Velocity = Vector3.zero;
 
 	public int hp = 3;
+
+	public int mana = 1;
+	private int maxMana = 3;
+
 	public Image hpImage;
 	public List<Sprite> healthbar = new List<Sprite>();
 
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 	float fallMultiplier = 2.5f;
 	float lowJumpMultiplier = .5f;
 	public Image fill;
+	public Image manaFill;
 	private float jumpCost = .5f;
 	public float stamina = 1;
 	public float maxStamina = 1;
@@ -38,15 +43,9 @@ public class PlayerController : MonoBehaviour {
 	public bool isGrounded = true;
 	public Transform groundCheckPoint;
 
-
-	private void Awake()
-	{
-		playerManager = PlayerManager.Instance;
-	}
-
 	private void Start()
 	{
-		transform.position = playerManager.lastCheckPointPos;
+		playerManager = PlayerManager.Instance;
 		rb2d = GetComponent<Rigidbody2D>();
 		
 	}
@@ -69,6 +68,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		GainStamina();
+		GainMana();
+		hpImage.sprite = healthbar[hp];
 	}
 
 	private void FixedUpdate()
@@ -136,8 +137,25 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (stamina < maxStamina)
-			stamina += .1f * Time.deltaTime * 5;
+			stamina += .3f * Time.deltaTime * 5;
 
+	}
+
+	private void GainMana()
+	{
+		if(mana == 0)
+		{
+			manaFill.fillAmount = 0;
+		} else if (mana == 1)
+		{
+			manaFill.fillAmount = .33f;
+		} else if (mana == 2)
+		{
+			manaFill.fillAmount = .66f;
+		} else if (mana == 3)
+		{
+			manaFill.fillAmount = 1f;
+		}
 	}
 
 	private bool IsGrounded()
@@ -155,9 +173,18 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			hp -= amount;
-			hpImage.sprite = healthbar[hp];
+		//	hpImage.sprite = healthbar[hp];
 		}
 		Debug.Log("Damage taken: " + amount);
+	}
+
+	public void GainHealth(int amount)
+	{
+		if (hp + amount <= 3)
+		{
+			hp -= amount;
+			hpImage.sprite = healthbar[hp];
+		}
 	}
 
 	public IEnumerator Knockback(float duration, float power, Vector3 direction)
@@ -177,14 +204,20 @@ public class PlayerController : MonoBehaviour {
 		hp -= 1;
 		if (hp <= 0)
 		{
-			Debug.Log("dead");
 			playerManager.ResetScene();
 
 		} else
 		{
 			hpImage.sprite = healthbar[hp];
-			transform.position = playerManager.lastCheckPointPos;
+			transform.position = playerManager.lastCheckPointPos.position;
 		}
 		
+	}
+
+	public void Died()
+	{
+		hp = 3;
+		hpImage.sprite = healthbar[3];
+		transform.position = playerManager.lastCheckPointPos.position;
 	}
 }

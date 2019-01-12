@@ -9,46 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1258691676008404}
+  m_RootGameObject: {fileID: 1919713539537822}
   m_IsPrefabParent: 1
---- !u!1 &1258691676008404
+--- !u!1 &1919713539537822
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4539445446709852}
-  - component: {fileID: 61900873801646186}
-  - component: {fileID: 114560009028564202}
-  - component: {fileID: 198390748416943910}
-  - component: {fileID: 199284110614340148}
+  - component: {fileID: 4673957665078032}
+  - component: {fileID: 61045543320672540}
+  - component: {fileID: 198742885721533680}
+  - component: {fileID: 199294448242885770}
+  - component: {fileID: 114576892052470170}
   m_Layer: 0
-  m_Name: Windzone
+  m_Name: Spawned_Wind_Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4539445446709852
+--- !u!4 &4673957665078032
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258691676008404}
+  m_GameObject: {fileID: 1919713539537822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.463, y: -0.274, z: -0.08234492}
+  m_LocalPosition: {x: -5.475, y: -0.274, z: -0.08234492}
   m_LocalScale: {x: 0.41965008, y: 0.9389671, z: 0.41965017}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61900873801646186
+--- !u!61 &61045543320672540
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258691676008404}
+  m_GameObject: {fileID: 1919713539537822}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -68,25 +68,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114560009028564202
+--- !u!114 &114576892052470170
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258691676008404}
+  m_GameObject: {fileID: 1919713539537822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d2bb07f6735cb643b781fb3fa084065, type: 3}
+  m_Script: {fileID: 11500000, guid: ae61bf0071e67a448a952b4aae8eec33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 30
+  windBall: {fileID: 1331784164433622, guid: bc42532da1cd2464eb44aa688300bcca, type: 2}
+  duration: 1
+  strength: 20
   direction: {x: 0, y: 0}
---- !u!198 &198390748416943910
+--- !u!198 &198742885721533680
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258691676008404}
+  m_GameObject: {fileID: 1919713539537822}
   serializedVersion: 5
   lengthInSec: 1
   simulationSpeed: 0.46
@@ -141,7 +143,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 21767862
+  randomSeed: 606409973
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3442,13 +3444,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &199284110614340148
+--- !u!199 &199294448242885770
 ParticleSystemRenderer:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1258691676008404}
+  m_GameObject: {fileID: 1919713539537822}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

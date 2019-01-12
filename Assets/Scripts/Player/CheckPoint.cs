@@ -16,7 +16,7 @@ public class CheckPoint : MonoBehaviour {
 	{
 		if (collision.CompareTag("Player"))
 		{
-			playerManager.lastCheckPointPos = this.transform.position;
+			playerManager.lastCheckPointPos = this.transform;
 		}
 	}
 }
