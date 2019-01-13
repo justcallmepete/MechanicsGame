@@ -7,6 +7,9 @@ public class PlayerManager : MonoBehaviour {
 
 	private static PlayerManager instance;
 
+	public int lives = 3;
+	private float maxStamina = 2;
+
 	private void Awake()
 	{
 		if (instance == null)
@@ -41,11 +44,28 @@ public class PlayerManager : MonoBehaviour {
 		GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos.position;
 	}
 
+	public void GameOver()
+	{
+		Debug.Log("Game over");
+		//Destroy(GameObject.FindGameObjectWithTag("Player"));
+		SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+		//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Died();
+	}
+
 
 	public void ResetScene()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Died();
+		lives -= 1;
+		if (lives <= 0)
+		{
+			Destroy(GameObject.FindGameObjectWithTag("Player"));
+			GameOver();
+		}
+		else
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Died();
+		}
 
 	}
 

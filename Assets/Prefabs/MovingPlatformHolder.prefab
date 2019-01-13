@@ -52,6 +52,8 @@ GameObject:
   - component: {fileID: 212204272136582020}
   - component: {fileID: 61254428625508280}
   - component: {fileID: 251360083768890678}
+  - component: {fileID: 61092982369922092}
+  - component: {fileID: 114794912404512038}
   m_Layer: 9
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -82,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1494642583143292}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.036, y: 0, z: 0}
+  m_LocalPosition: {x: 0.951, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4668169117578792}
@@ -95,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1514279568871168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.722, y: 0, z: 0}
+  m_LocalPosition: {x: -0.835, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4668169117578792}
@@ -130,6 +132,31 @@ Transform:
   m_Father: {fileID: 4668169117578792}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61092982369922092
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743820200525918}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.13}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.64, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 1
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.61, y: 0.14}
+  m_EdgeRadius: 0
 --- !u!61 &61254428625508280
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -166,11 +193,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff24916261e32049a784ad8de073030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
+  speed: 0.7
   leftEdge: {fileID: 4584447826427170}
   rightEdge: {fileID: 4006123949515780}
   platform: {fileID: 1743820200525918}
   movingRight: 0
+--- !u!114 &114794912404512038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743820200525918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17799ec1118b37848bd057579fc0b75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212204272136582020
 SpriteRenderer:
   m_ObjectHideFlags: 1

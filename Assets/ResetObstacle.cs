@@ -24,6 +24,7 @@ public class ResetObstacle : MonoBehaviour {
 				Rigidbody2D obsRB = obstacles[i].GetComponent<Rigidbody2D>();
 				obsRB.constraints = RigidbodyConstraints2D.FreezeAll;
 				obstacles[i].GetComponent<FallingBlock>().playerOnBlock = false;
+				obstacles[i].GetComponent<FallingBlock>().timer = 0;
 			}
 			obstacles[i].transform.position = positions[i];
 		}

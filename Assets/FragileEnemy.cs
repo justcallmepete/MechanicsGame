@@ -94,6 +94,7 @@ public class FragileEnemy : MonoBehaviour
 		if (collision.CompareTag("Player"))
 		{
 			OnDeath.Invoke();
+		//	Instantiate(deathItemSpawn, transform.position, deathItemSpawn.transform.rotation, null);
 			Destroy(gameObject);
 		}
 	}
@@ -102,6 +103,7 @@ public class FragileEnemy : MonoBehaviour
 	{
 		if (deathItemSpawn)
 		{
+			Debug.Log("Spawning");
 			Instantiate(deathItemSpawn, transform.position, deathItemSpawn.transform.rotation, null);
 		}
 	}

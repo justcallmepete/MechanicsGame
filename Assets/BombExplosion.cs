@@ -38,7 +38,11 @@ public class BombExplosion : MonoBehaviour {
 		// if collides with player - damage da player
 		if (collision.CompareTag("Enemy"))
 		{
-			Destroy(collision.transform.gameObject);
+			if (collision.GetComponent<Enemy>())
+			{
+				collision.GetComponent<Enemy>().SpawnPrefab();
+			} 
+				Destroy(collision.transform.gameObject);
 		}
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FallingBlock : MonoBehaviour {
 
-	float timer = 0;
+	public float timer = 0;
 	float duration = 1;
 	public bool playerOnBlock = false;
 	Rigidbody2D rb;

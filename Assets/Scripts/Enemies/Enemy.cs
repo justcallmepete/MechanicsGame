@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour {
 	float timer = 0;
 	float delay = 2f;
 
+	public GameObject deathItemSpawn;
+
 	bool movingRight = true;
 	public LayerMask groundLayer;
 
@@ -75,5 +77,13 @@ public class Enemy : MonoBehaviour {
 			}
 
 
+	}
+
+	public void SpawnPrefab()
+	{
+		if (deathItemSpawn)
+		{
+			Instantiate(deathItemSpawn, transform.position, deathItemSpawn.transform.rotation, null);
+		}
 	}
 }
