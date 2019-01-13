@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -10,12 +11,18 @@ public class PlayerManager : MonoBehaviour {
 	public int lives = 3;
 	private float maxStamina = 2;
 
+	public GameObject wonImage;
+	public GameObject lostImage;
+
 	private void Awake()
 	{
 		if (instance == null)
 		{
 			instance = this;
 			DontDestroyOnLoad(instance);
+		} else if (instance != this)
+		{
+			Destroy(this.gameObject);
 		}
 	}
 
@@ -46,10 +53,21 @@ public class PlayerManager : MonoBehaviour {
 
 	public void GameOver()
 	{
-		Debug.Log("Game over");
+		lostImage.SetActive(true);
+		StartCoroutine(RestartGame());
 		//Destroy(GameObject.FindGameObjectWithTag("Player"));
-		SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+
+		//SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
 		//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Died();
+	}
+
+	public IEnumerator RestartGame()
+	{
+		yield return new WaitForSeconds(5);
+		SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+		lostImage.SetActive(false);
+		wonImage.SetActive(false);
+		lives = 3;
 	}
 
 

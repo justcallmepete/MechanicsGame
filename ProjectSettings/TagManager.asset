@@ -8,6 +8,8 @@ TagManager:
   - WindZone
   - Wall
   - Enemy
+  - Boss
+  - UberSpike
   layers:
   - Default
   - TransparentFX
